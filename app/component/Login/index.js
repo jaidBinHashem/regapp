@@ -12,7 +12,7 @@ const Login = props => {
 
     useEffect(() => {
         !isAuthenticated && otpSent && this.scroll.scrollBy(1);
-        isAuthenticated && props.navigation.navigate('App');
+        isAuthenticated && props.navigation.navigate('AppStack');
     }, [otpSent, isAuthenticated]);
 
     return (

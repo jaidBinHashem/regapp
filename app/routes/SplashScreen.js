@@ -14,6 +14,7 @@ const SplashScreen = props => {
     useEffect(() => {
         dispatch({ type: 'auth/checkTokenAsync' });
         const timer = setTimeout(() => {
+            isAuthenticatedRef.current && props.navigation.navigate('AppStack');
             !isAuthenticatedRef.current && props.navigation.navigate('Login');
         }, 1000);
         return () => clearTimeout(timer);

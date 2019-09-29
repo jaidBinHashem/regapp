@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { getService, postService } from '../../network';
+import { APP_TOKEN } from '../../util/app_constants';
+import { postService } from '../../network';
 
 getToken = async () => {
     try {
-        return await AsyncStorage.getItem('@app_token');
+        return await AsyncStorage.getItem(APP_TOKEN);
     } catch (e) {
         console.log(`AsyncStorage error : ${e}`);
     }
@@ -11,7 +12,7 @@ getToken = async () => {
 
 setToken = async (token) => {
     try {
-        return await AsyncStorage.setItem('@app_token', token)
+        return await AsyncStorage.setItem(APP_TOKEN, token)
     } catch (e) {
         console.log(`AsyncStorage error : ${e}`);
     }
@@ -69,7 +70,7 @@ export default {
     effects: (dispatch) => ({
         async checkTokenAsync() {
             let token = await getToken();
-            token && this.changeStatus();
+            token && (dispatch.user.getUserAsync(true), this.changeStatus());
         },
         async makeOtpRequestAsync(payload) {
             this.resetUserNotFound();
@@ -99,6 +100,7 @@ export default {
         },
         async setTokenAsync(payload) {
             await setToken(payload);
+            dispatch.user.getUserAsync(false);
             this.changeStatus();
         }
     })
