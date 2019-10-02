@@ -72,6 +72,7 @@ export default {
     async getUserAsync(payload) {
       if (payload) {
         let user = await getUserFromStorage();
+
         if (user) {
           this.setUserState(JSON.parse(user));
         } else {

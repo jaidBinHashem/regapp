@@ -6,7 +6,7 @@ import styles from './styles';
 
 const RectangleView = props => {
     return (
-        <TouchableOpacity style={styles.rectangleContainer}>
+        <TouchableOpacity onPress={() => props.navigation.navigate(props.pageName)} style={styles.rectangleContainer}>
             <Text style={{ fontSize: 18 }}>{props.title}</Text>
             <Icon type="entypo" name='chevron-thin-right' size={25} color='lightgray' />
         </TouchableOpacity>

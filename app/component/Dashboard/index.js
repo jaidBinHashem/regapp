@@ -90,6 +90,7 @@ const Dashboard = props => {
                         </View>
                         <RectangleView
                             title="Add Farmer"
+                            pageName = "AddFarmer"
                             {...props}
                         />
                         <RectangleView
@@ -101,6 +102,12 @@ const Dashboard = props => {
             </View>
         </Fragment>
     );
+}
+
+Dashboard.navigationOptions = {
+    headerStyle: {
+        height:0
+      },
 }
 
 export default Dashboard;
