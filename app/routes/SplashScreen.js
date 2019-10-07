@@ -16,7 +16,7 @@ const SplashScreen = props => {
         const timer = setTimeout(() => {
             isAuthenticatedRef.current && props.navigation.navigate('AppStack');
             !isAuthenticatedRef.current && props.navigation.navigate('Login');
-        }, 1500);
+        }, 1200);
         return () => clearTimeout(timer);
     }, []);
 

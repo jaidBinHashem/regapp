@@ -11,9 +11,6 @@ const Dashboard = props => {
     const user = useSelector(state => state.user.userState);
     const userRanking = useSelector(state => state.user.userRanking);
 
-
-
-
     useEffect(() => {
         dispatch({ type: 'user/getUserRankingAsync' });
     }, []);
@@ -29,8 +26,8 @@ const Dashboard = props => {
                     <View style={{ marginHorizontal: 15, marginBottom: 20 }}>
                         <View style={{ backgroundColor: "white", height: 90, elevation: 10, }}                        >
                             <View style={{ flex: 1, paddingLeft: 18, justifyContent: "center", paddingTop: 18 }}>
-                                <Text style={{ color: "#000000", fontSize: 17 }}>{user.name}</Text>
-                                <Text style={{ flex: 1, fontSize: 15, color: "#9e9e9e", marginTop: 6 }}>{user.union_name}, {user.upazila_name}, {user.district_name}</Text>
+                                <Text style={{ color: "#000000", fontSize: 17 }}>{user && user.name}</Text>
+                                {user && <Text style={{ flex: 1, fontSize: 15, color: "#9e9e9e", marginTop: 6 }}>{user.union_name}, {user.upazila_name}, {user.district_name}</Text>}
                             </View>
                         </View>
 
@@ -90,11 +87,12 @@ const Dashboard = props => {
                         </View>
                         <RectangleView
                             title="Add Farmer"
-                            pageName = "AddFarmer"
+                            pageName="AddFarmer"
                             {...props}
                         />
                         <RectangleView
                             title="Registration History"
+                            pageName="FarmersList"
                             {...props}
                         />
                     </View>
@@ -106,8 +104,8 @@ const Dashboard = props => {
 
 Dashboard.navigationOptions = {
     headerStyle: {
-        height:0
-      },
+        height: 0
+    },
 }
 
 export default Dashboard;
