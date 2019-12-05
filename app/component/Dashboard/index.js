@@ -1,7 +1,5 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
-import { TouchableOpacity, StatusBar, Image, Text, View, KeyboardAvoidingView, TextInput, ScrollView } from 'react-native';
-import BusyIndicator from 'react-native-busy-indicator';
-import { Icon } from 'react-native-elements';
+import React, { Fragment, useEffect } from "react";
+import { StatusBar, Text, View, ScrollView } from 'react-native';
 import RectangleView from "./RectangleView";
 import styles from './styles';
 import { useSelector, useDispatch } from "react-redux";
@@ -40,24 +38,6 @@ const Dashboard = props => {
                                 marginBottom: 28
                             }}
                         >
-                            <View>
-                                <Text style={{ color: "#9e9e9e", fontSize: 17 }}>
-                                    আপনার ইউনিয়নে আপনার অবস্থান
-                                </Text>
-                                <View style={styles.pc}>
-                                    <Text
-                                        style={{ color: "#19B023", fontSize: 30, textAlign: "center" }}
-                                    >
-                                        {userRanking && userRanking.position} মোট{" "}
-                                        {userRanking && userRanking.total_users}
-                                    </Text>
-                                    <Text
-                                        style={{ color: "#9e9e9e", fontSize: 17, textAlign: "center" }}
-                                    >
-                                        জনের  মধ্যে
-                                    </Text>
-                                </View>
-                            </View>
                             <Text
                                 style={{
                                     marginBottom: 8,
@@ -82,7 +62,7 @@ const Dashboard = props => {
                                     fontSize: 30,
                                     color: "white",
                                     textAlign: "center"
-                                }}>{userRanking && userRanking.current_month_score}</Text>
+                                }}>{userRanking && userRanking}</Text>
                             </View>
                         </View>
                         <RectangleView

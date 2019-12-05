@@ -7,8 +7,6 @@ import moment from 'moment';
 import { getService } from '../../network';
 import styles from './styles';
 
-const { width, height } = Dimensions.get('window');
-
 const FarmersList = props => {
     const [farmers, setFarmers] = useState([]);
     const [activeSections, setSection] = useState([]);
@@ -24,40 +22,38 @@ const FarmersList = props => {
             let response = await getService(request);
             let farmers = response.data.data.referral.data;
             let farmersArrays = [];
-            do {
-                let tempArr = farmers;
-                let key = farmers[0].created_at;
-                farmersArrays.push(tempArr.filter(data => data.created_at == key));
-                farmers = tempArr.filter(data => data.created_at != key);
-            } while (farmers.length > 0);
+            if (farmers.length > 0) {
+                do {
+                    let tempArr = farmers;
+                    let key = moment(farmers[0]).format("MMMM, YYYY");
+                    farmersArrays.push(tempArr.filter(data => moment(data.created_at).format("MMMM, YYYY") == key));
+                    farmers = tempArr.filter(data => moment(data.created_at).format("MMMM, YYYY") != key);
+                } while (farmers.length > 0);
+            }
             setFarmers(farmersArrays);
         };
         fetchFarmers();
     }, []);
 
-    _renderHeader = (section, index, isActive) => {
-        return (
-            <View style={styles.header}>
-                <Text style={styles.headerText}>{section.name}</Text>
-                <Icon name={isActive ? "chevron-thin-up" : "chevron-thin-down"} type="entypo" color="lightgray" />
-            </View>
-        );
-    };
+    _renderHeader = (section, index, isActive) => (
+        <View style={styles.header}>
+            <Text style={styles.headerText}>{section.name}</Text>
+            <Icon name={isActive ? "chevron-thin-up" : "chevron-thin-down"} type="entypo" color="lightgray" />
+        </View>
+    );
 
-    _renderContent = section => {
-        return (
-            <View style={styles.content}>
-                <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                    <Text style={styles.lightGray}>মোবাইল নং: </Text>
-                    <Text style={styles.lightGray}>{section.mobile_no}</Text>
-                </View>
-                <View style={{ flexDirection: 'row', marginBottom: 5 }}>
-                    <Text style={styles.lightGray}>তারিখ: </Text>
-                    <Text style={styles.lightGray}>{moment(section.created_at).format("MMM Do, YYYY")}</Text>
-                </View>
+    _renderContent = section => (
+        <View style={styles.content}>
+            <View style={{ flexDirection: 'row', marginBottom: 5 }}>
+                <Text style={styles.lightGray}>মোবাইল নং: </Text>
+                <Text style={styles.lightGray}>{section.mobile_no}</Text>
             </View>
-        );
-    };
+            <View style={{ flexDirection: 'row', marginBottom: 5 }}>
+                <Text style={styles.lightGray}>তারিখ: </Text>
+                <Text style={styles.lightGray}>{moment(section.created_at).format("MMM Do, YYYY")}</Text>
+            </View>
+        </View>
+    );
 
     _updateSections = (activeSections, index) => {
         let state = [];

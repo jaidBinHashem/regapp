@@ -11,7 +11,7 @@ const mobileNoRegx = new RegExp("^01([3-9])\\d{8}$");
 const MobileNumber = props => {
     const dispatch = useDispatch();
     const userNotFound = useSelector(state => state.auth.userNotFound);
-    const [mobileNumber, setMobileNumber] = useState("01621370573");
+    const [mobileNumber, setMobileNumber] = useState("");
     const [mobileNumberError, setMobileNumberError] = useState("");
 
 
@@ -50,7 +50,7 @@ const MobileNumber = props => {
     return (
         <Fragment>
             <StatusBar backgroundColor="#1da326" barStyle="light-content" translucent={false} />
-            <ScrollView keyboardShouldPersistTaps="always">
+            <ScrollView keyboardShouldPersistTaps="handled">
                 <KeyboardAvoidingView enabled style={styles.container} >
                     <Image style={styles.smsIcon} source={require('../../assets/sms.png')} />
                     <Text style={styles.smsText}>এসএমএস-এর মাধ্যমে লগইন করুন</Text>

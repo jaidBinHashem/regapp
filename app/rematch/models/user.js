@@ -37,7 +37,7 @@ getUserFromApi = async () => {
 getUserRanking = async () => {
   try {
     let request = {
-      endPoint: '/get/my/score',
+      endPoint: '/api/v3/auth/farmer/referral/points',
       authenticate: true,
       showLoader: true,
     }
@@ -86,7 +86,7 @@ export default {
     },
     async getUserRankingAsync() {
       let response = await getUserRanking();
-      response.success && this.setUserRanking(response.data.data.data)
+      response.success && this.setUserRanking(response.data.data.points)
     }
   })
 }

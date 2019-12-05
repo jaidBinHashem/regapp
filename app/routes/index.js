@@ -34,7 +34,7 @@ const AppNavigator = createAppContainer(createAnimatedSwitchNavigator(
         AppStack,
     },
     {
-        initialRouteName: 'SplashScreen',
+        initialRouteName: 'Login',
         mode: 'modal',
         transition: (
             <Transition.Together>
@@ -43,7 +43,7 @@ const AppNavigator = createAppContainer(createAnimatedSwitchNavigator(
                     durationMs={800}
                     interpolation="easeIn"
                 />
-                <Transition.In type="fade" durationMs={500} />
+                <Transition.In type="fade" durationMs={800} />
             </Transition.Together>
         ),
     }
